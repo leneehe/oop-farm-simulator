@@ -10,11 +10,11 @@ class Farm
     loop do
       puts "~" * 30
       puts "What would you like to do today?"
-      puts "field -> adds a new field"
-      puts "harvest -> harvests crops and adds to total harvested"
-      puts "status -> displays some information about the farm"
-      puts "relax -> provides lovely descriptions of your fields"
-      puts "exit -> exits the program"
+      puts "1. field -> adds a new field"
+      puts "2. harvest -> harvests crops and adds to total harvested"
+      puts "3. status -> displays some information about the farm"
+      puts "4. relax -> provides lovely descriptions of your fields"
+      puts "5. exit -> exits the program"
       puts "~" * 30
       selection
     end
@@ -23,15 +23,15 @@ class Farm
   def selection
     user_input = gets.chomp
     case user_input
-    when "field"
+    when "1", "field"
       add_field
-    when "harvest"
+    when "2", "harvest"
       Field.harvest
-    when "status"
+    when "3", "status"
       Field.status
-    when "relax"
+    when "4", "relax"
       Field.relax
-    when "exit"
+    when "5", "exit"
       exit
     else
       puts "That's not possible with your farm! Select again."
@@ -42,16 +42,22 @@ class Farm
   def add_field
     puts "What kind of field is it? Corn or wheat?"
     user_field = gets.chomp
-    puts "How large is the field in hectares?"
-    user_hectares = gets.chomp.to_i
     case user_field
-    when "corn"
-      Corn.new(user_hectares)
-    when "wheat"
-      Wheat.new(user_hectares)
+    when "corn", "wheat"
+      puts "How large is the field in hectares?"
+      user_hectares = gets.chomp.to_i
+      if user_field == "corn" && user_hectares > 0
+        Corn.new(user_hectares)
+      elsif user_field == "wheat" && user_hectares > 0
+        Wheat.new(user_hectares)
+      else
+        puts "Bad input!"
+      end
     else
       puts "Not a valid field!"
+      add_field
     end
   end
-
 end
+
+Farm.new
