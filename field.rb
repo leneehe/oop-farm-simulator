@@ -47,6 +47,8 @@ class Field
         puts "#{field.area} hectares of tall green stalks rustling in the breeze fill your horizon."
       elsif field.type == "wheat"
         puts "The sun hangs low, casting an orange glow on a sea of #{field.area} hectares of wheat."
+      elsif field.type == "rice"
+        puts "Blasted by mildew, more withered than last year, #{field.area} hectares of rice-field glinting in the dark."
       end
     end
     return nil
@@ -65,5 +67,11 @@ WHEAT_AMOUNT = 30
   def initialize(hectare)
     super("wheat", hectare, WHEAT_AMOUNT)
   end
+end
 
+class Rice < Field
+RICE_AMOUNT = 40
+  def initialize(hectare)
+    super("rice", hectare, RICE_AMOUNT)
+  end
 end

@@ -40,16 +40,18 @@ class Farm
   end
 
   def add_field
-    puts "What kind of field is it? Corn or wheat?"
+    puts "What kind of field is it? Corn, wheat or rice?"
     user_field = gets.chomp
     case user_field
-    when "corn", "wheat"
+    when "corn", "wheat", "rice"
       puts "How large is the field in hectares?"
       user_hectares = gets.chomp.to_i
       if user_field == "corn" && user_hectares > 0
         Corn.new(user_hectares)
       elsif user_field == "wheat" && user_hectares > 0
         Wheat.new(user_hectares)
+      elsif user_field == "rice" && user_hectares > 0
+        Rice.new(user_hectares)
       else
         puts "Bad input!"
       end
